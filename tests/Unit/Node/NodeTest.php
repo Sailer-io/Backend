@@ -1,14 +1,13 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Node;
 
-use App\User;
+use App\Node;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
-class JWTTest extends TestCase
+class NodeTest extends TestCase
 {
     /**
      * A basic test example.
@@ -17,7 +16,10 @@ class JWTTest extends TestCase
      */
     public function testCreation()
     {
-        $jwt=JWTAuth::fromUser(User::find(1));
-        $this->assertRegExp('/^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]*$/', $jwt);
+        $node = new Node();
+        $node->name = 'My amazing node';
+        $node->ip='1.2.3.4';
+        $node->user_id=1;
+        $this->assertTrue($node->save());
     }
 }
