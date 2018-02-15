@@ -50,19 +50,19 @@ test:
 deploy_test:
   stage: deploy_test
   only:
-  - developp
+  - develop
   script:
   - apt-get update -yqq
   - apt-get install -yqq rsync openssh-client
   - mkdir -p ~/.ssh
-  - echo "$TSSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+  - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
   - chmod -R 700 ~/.ssh
-  - rsync -az --exclude=.git --exclude=vendor --exclude=tests -e "ssh -o StrictHostKeyChecking=no -l $TSSH_USER" ./ $TIP:$TFOLDER
-  - ssh -o StrictHostKeyChecking=no $TSSH_USER@$TIP "cd $TFOLDER && chown -R $TWWW_USER:$TWWW_USER . && composer install --no-dev --optimize-autoloader; php artisan migrate:fresh --seed"
+  - rsync -az --exclude=.git --exclude=vendor --exclude=tests -e "ssh -o StrictHostKeyChecking=no -l $SSH_USER" ./ $IP:$TFOLDER
+  - ssh -o StrictHostKeyChecking=no $SSH_USER@$IP "cd $TFOLDER && composer install --no-dev --optimize-autoloader; php artisan migrate:fresh --seed"
 deploy_production:
   stage: deploy_production
   only:
-  - masterr
+  - master
   script:
   - apt-get update -yqq
   - apt-get install -yqq rsync openssh-client
