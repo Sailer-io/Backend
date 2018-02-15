@@ -18,6 +18,6 @@ class JWTTest extends TestCase
     public function testCreation()
     {
         $jwt=JWTAuth::fromUser(User::find(1));
-        $this->assertRegExp('^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]*$', $jwt);
+        $this->assertRegExp('/^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]*$/', $jwt);
     }
 }
