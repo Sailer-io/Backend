@@ -1,0 +1,6 @@
+{
+  "name": "DWM API",
+  "version": "0.1.0-beta",
+  "description": "The Docker Web Manager backend API",
+  "url": "https://beta.api.dwm.ovh"
+}
