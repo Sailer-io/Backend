@@ -2,6 +2,7 @@
 
 namespace App\Node;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Node extends Model
