@@ -16,15 +16,11 @@ class NodeTest extends TestCase
      */
     public function testCreation()
     {
-        $this->node = new Node();
-        $this->node->name = 'My amazing node';
-        $this->node->ip='1.2.3.4';
-        $this->node->user_id=1;
-        $this->assertTrue($this->node->save());
-    }
-
-    public function testConnect(){
-        $canConnect=$this->node->testConnect();
-        $this->assertTrue($canConnect);
+        $node = new Node();
+        $node->name = 'My amazing node';
+        $node->ip='1.2.3.4';
+        $node->rootPassword='abcd';
+        $node->user_id=1;
+        $this->assertTrue($node->save());
     }
 }
