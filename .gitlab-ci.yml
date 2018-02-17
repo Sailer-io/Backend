@@ -29,7 +29,6 @@ test:
   # Install PHP extensions
   - docker-php-ext-configure mcrypt
   - docker-php-ext-install mbstring mcrypt pdo_mysql curl json intl gd xml zip bz2 opcache
-  - docker-php-pecl-install ssh2
   # Install and run Composer
   - curl -sS https://getcomposer.org/installer | php
   - php composer.phar install
