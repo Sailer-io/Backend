@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Node;
+use App\Http\DwmResponse;
+use App\Node\Node;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class NodeController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->user = JWTAuth::parseToken()->authenticate();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,8 +27,7 @@ class NodeController extends Controller
      */
     public function index()
     {
-        $u=JWTAuth::parseToken()->authenticate();
-        return $u->nodes;
+        return $this->user->nodes;
     }
 
     /**
@@ -32,18 +38,34 @@ class NodeController extends Controller
      * @apiGroup Nodes
      * @apiVersion 0.1.0-beta
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $r
+     * @return DwmResponse
      */
-    public function store(Request $request)
+    public function store(Request $r)
     {
-        //
+        $r->validate([
+            'name' => 'required',
+            'ip' => 'required',
+            'rootPassword' => 'required',
+        ]);
+        $node = new Node();
+        $node->ip = $r->ip;
+        $node->name = $r->name;
+        $node->rootPassword = $r->rootPassword;
+        $node->user_id=$this->user->id;
+        if ($node->testConnect()) {
+            $node->save();
+            return new DwmResponse(true, ['node' => $node->fresh()]);
+        } else {
+            return new DwmResponse(false, 'Can\'t login to the given server. Please verify the credentials.', 400);
+        }
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Node  $node
+     * @param  \App\Node $node
      * @return \Illuminate\Http\Response
      */
     public function show(Node $node)
@@ -54,8 +76,8 @@ class NodeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Node  $node
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Node $node
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Node $node)
@@ -66,7 +88,7 @@ class NodeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Node  $node
+     * @param  \App\Node $node
      * @return \Illuminate\Http\Response
      */
     public function destroy(Node $node)

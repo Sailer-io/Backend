@@ -16,7 +16,9 @@ class CreateNodesTable extends Migration
         Schema::create('nodes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('ip');
+            $table->string('ip')->unique();
+            $table->string('rootPassword')->nullable();
+            $table->tinyInteger('status')->default(\App\Node\Status::WAITING);
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 Route::prefix('auth')->group(function (){
     Route::get('login', function (){
         $token=\Tymon\JWTAuth\Facades\JWTAuth::fromUser(\App\User::find(1));
-        $r=new \Illuminate\Http\Response();
+        $r=new \Illuminate\Http\Response($token);
         return $r->header('Authorization', 'Bearer '.$token);
     });
     Route::middleware('jwt.refresh')->get('refresh', function (){
