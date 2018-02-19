@@ -2,7 +2,9 @@
 
 namespace App\Node;
 
+use App\Container;
 use App\User;
+use App\Utils;
 use Illuminate\Database\Eloquent\Model;
 
 class Node extends Model
@@ -25,6 +27,10 @@ class Node extends Model
     {
         $c = ssh2_connect($this->ip, static::DEFAULT_SSH_PORT);
         return (bool)@ssh2_auth_password($c, 'root', $this->rootPassword);
+    }
+
+    public function containers(){
+        return $this->hasMany(Container::class);
     }
 
 }

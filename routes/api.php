@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 Route::prefix('auth')->group(function (){
     Route::get('login', function (){
         $token=\Tymon\JWTAuth\Facades\JWTAuth::fromUser(\App\User::find(1));
@@ -27,4 +28,9 @@ Route::prefix('auth')->group(function (){
 Route::middleware('jwt.auth')->group(function (){
     Route::get('whoami', 'UserController@whoami');
     Route::apiResource('nodes', 'NodeController');
+});
+
+Route::middleware('node.auth')->namespace('Agent')->prefix('agent')->group(function (){
+    Route::get('whoami', 'NodeController@whoami');
+    Route::apiResource('containers', 'ContainerController');
 });

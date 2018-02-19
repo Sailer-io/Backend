@@ -52,10 +52,10 @@ class NodeController extends Controller
         $node->ip = $r->ip;
         $node->name = $r->name;
         $node->rootPassword = $r->rootPassword;
-        $node->user_id=$this->user->id;
+        $node->user_id = $this->user->id;
         if ($node->testConnect()) {
             $node->save();
-            return new DwmResponse(true, ['node' => $node->fresh()]);
+            return new DwmResponse(true, $node->fresh());
         } else {
             return new DwmResponse(false, 'Can\'t login to the given server. Please verify the credentials.', 400);
         }

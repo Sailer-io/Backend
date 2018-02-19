@@ -11,7 +11,7 @@ namespace App\Http;
 
 use Illuminate\Http\JsonResponse;
 
-class DwmResponse extends JsonResponse
+final class DwmResponse extends JsonResponse
 {
 
     public function __construct($success = true, $data = null, $status = 200, $headers = [], $options = 0)
@@ -19,10 +19,10 @@ class DwmResponse extends JsonResponse
         if (is_null($data)) {
             $data = ['success' => $success];
         } elseif (is_string($data)) {
-            $data = ['message' => $data];
+            $data = ['success' => $success, 'data' => $data];
         } else {
             try {
-                $data['success'] = $success;
+                $data = ['data' => $data, 'success' => $success];
             } catch (\Exception $e) {
             }
         }
