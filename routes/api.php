@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +11,6 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('token', function (){
+Route::get('token', function () {
     return \Tymon\JWTAuth\Facades\JWTAuth::fromUser(\App\User::find(1));
 });
