@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Node\Node;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -26,4 +27,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function nodes()
+    {
+        return $this->hasMany(Node::class);
+    }
 }
