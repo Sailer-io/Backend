@@ -2,6 +2,7 @@
 if [ $TRAVIS_BRANCH == 'develop' ]; then
     mkdir -p ~/.ssh
     echo $(echo $SSH_PRIVATE_KEY | base64 -d) > /tmp/deploy.key
+    eval "$(ssh-agent -s)"
     chmod 600 /tmp/deploy.key
     ssh-add /tmp/deploy.key
     rsync -az --exclude=.git --exclude=vendor --exclude=tests -e "ssh -o StrictHostKeyChecking=no -l $SSH_USER" ./ $IP:$TFOLDER
@@ -9,6 +10,7 @@ if [ $TRAVIS_BRANCH == 'develop' ]; then
 elif [ $TRAVIS_BRANCH == 'master' ]; then
     mkdir -p ~/.ssh
     echo $(echo $SSH_PRIVATE_KEY | base64 -d) > /tmp/deploy.key
+    eval "$(ssh-agent -s)"
     chmod 600 /tmp/deploy.key
     ssh-add /tmp/deploy.key
     rsync -az --exclude=.git --exclude=vendor --exclude=tests -e "ssh -o StrictHostKeyChecking=no -l $SSH_USER" ./ $IP:$FOLDER
