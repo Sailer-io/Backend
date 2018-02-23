@@ -3,7 +3,7 @@
  * https://dwm.ovh
  * User: Lénaïc GROLLEAU
  * Date: 17/02/18
- * Time: 18:37
+ * Time: 18:37.
  */
 
 namespace App;
@@ -18,6 +18,7 @@ abstract class Utils
         for ($i = 0; $i < $length; $i++) {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
+
         return $randomString;
     }
 }

@@ -11,11 +11,11 @@ class ContainersTableSeeder extends Seeder
      */
     public function run()
     {
-        $f=Faker\Factory::create();
+        $f = Faker\Factory::create();
         for ($i = 0; $i < 10; $i++) {
             \App\Container::create([
                 'hostname' => $f->domainName,
-                'node_id' => \App\Node\Node::first()->id
+                'node_id'  => \App\Node\Node::first()->id,
             ]);
         }
     }

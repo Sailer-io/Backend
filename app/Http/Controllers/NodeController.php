@@ -9,7 +9,6 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class NodeController extends Controller
 {
-
     public function __construct()
     {
         $this->user = JWTAuth::parseToken()->authenticate();
@@ -39,13 +38,14 @@ class NodeController extends Controller
      * @apiVersion 0.1.0-beta
      *
      * @param Request $r
+     *
      * @return SailerResponse
      */
     public function store(Request $r)
     {
         $r->validate([
-            'name' => 'required',
-            'ip' => 'required',
+            'name'         => 'required',
+            'ip'           => 'required',
             'rootPassword' => 'required',
         ]);
         $node = new Node();
@@ -55,17 +55,18 @@ class NodeController extends Controller
         $node->user_id = $this->user->id;
         if ($node->testConnect()) {
             $node->save();
+
             return new SailerResponse(true, $node->fresh());
         } else {
             return new SailerResponse(false, 'Can\'t login to the given server. Please verify the credentials.', 400);
         }
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Node $node
+     * @param \App\Node $node
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Node $node)
@@ -76,8 +77,9 @@ class NodeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Node $node
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Node                $node
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Node $node)
@@ -88,7 +90,8 @@ class NodeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Node $node
+     * @param \App\Node $node
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Node $node)

@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Container extends Model
 {
-    public function node(){
+    public function node()
+    {
         return $this->belongsTo(Node::class);
     }
 }
