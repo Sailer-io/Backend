@@ -17,5 +17,6 @@ before_script:
   - php artisan migrate --seed
 script:
   - vendor/bin/phpunit --coverage-text --colors=never
-
+addons:
+  ssh_known_hosts: $IP
 after_success: bash .travis/deploy.sh
