@@ -1,4 +1,5 @@
 #!/bin/bash
+echo $TRAVIS_BRANCH
 if [ $TRAVIS_BRANCH == 'develop' ]; then
     sudo mkdir -p ~/.ssh
     echo $(echo $SSH_PRIVATE_KEY | base64 -d) > ~/.ssh/id_rsa
