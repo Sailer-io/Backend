@@ -2,7 +2,7 @@ language: php
 dist: trusty
 php:
   - 7.2
-sudo: false
+sudo: true
 cache:
   directories:
     - $HOME/.composer/cache
@@ -17,3 +17,6 @@ before_script:
   - php artisan migrate --seed
 script:
   - vendor/bin/phpunit --coverage-text --colors=never
+addons:
+  ssh_known_hosts: $IP
+after_success: sudo bash .travis/deploy.sh
