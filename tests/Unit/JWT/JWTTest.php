@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\JWT;
 
 use App\User;
 use Tests\TestCase;

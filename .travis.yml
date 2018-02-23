@@ -1,0 +1,21 @@
+language: php
+dist: trusty
+php:
+  - 7.2
+sudo: false
+cache:
+  directories:
+    - $HOME/.composer/cache
+services:
+  - mysql
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS travis;'
+before_script:
+  - cp .env.testing .env
+  - travis_retry composer install --no-interaction --no-suggest
+  - php artisan key:generate
+  - php artisan migrate --seed
+script:
+  - vendor/bin/phpunit --coverage-text --colors=never
+
+after_success: bash .travis/deploy.sh
