@@ -17,3 +17,12 @@ before_script:
   - php artisan migrate --seed
 script:
   - vendor/bin/phpunit --coverage-text --colors=never
+
+after_success:
+  only:
+    - development
+  - mkdir -p ~/.ssh
+  - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+  - chmod -R 700 ~/.ssh
+  - rsync -az --exclude=.git --exclude=vendor --exclude=tests -e "ssh -o StrictHostKeyChecking=no -l $SSH_USER" ./ $IP:$TFOLDER
+  - ssh -o StrictHostKeyChecking=no $SSH_USER@$IP "cd $TFOLDER && composer install --no-dev --optimize-autoloader; php artisan migrate:fresh --seed"

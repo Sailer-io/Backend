@@ -33,4 +33,5 @@ Route::middleware('jwt.auth')->group(function (){
 Route::middleware('node.auth')->namespace('Agent')->prefix('agent')->group(function (){
     Route::get('whoami', 'NodeController@whoami');
     Route::apiResource('containers', 'ContainerController');
+    Route::get('ping', 'AppController@ping');
 });

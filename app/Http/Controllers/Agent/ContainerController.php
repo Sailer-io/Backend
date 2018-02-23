@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Agent;
 
 use App\Container;
-use App\Http\DwmResponse;
+use App\Http\SailerResponse;
 use Illuminate\Http\Request;
 
 class ContainerController extends BaseAgentController
@@ -12,11 +12,11 @@ class ContainerController extends BaseAgentController
     /**
      * Display a listing of the resource.
      *
-     * @return DwmResponse
+     * @return SailerResponse
      */
     public function index()
     {
-        return new DwmResponse(true, $this->node->containers);
+        return new SailerResponse(true, $this->node->containers);
     }
 
     /**

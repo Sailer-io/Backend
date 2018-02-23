@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\DwmResponse;
+use App\Http\SailerResponse;
 use App\Node\Node;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -39,7 +39,7 @@ class NodeController extends Controller
      * @apiVersion 0.1.0-beta
      *
      * @param Request $r
-     * @return DwmResponse
+     * @return SailerResponse
      */
     public function store(Request $r)
     {
@@ -55,9 +55,9 @@ class NodeController extends Controller
         $node->user_id = $this->user->id;
         if ($node->testConnect()) {
             $node->save();
-            return new DwmResponse(true, $node->fresh());
+            return new SailerResponse(true, $node->fresh());
         } else {
-            return new DwmResponse(false, 'Can\'t login to the given server. Please verify the credentials.', 400);
+            return new SailerResponse(false, 'Can\'t login to the given server. Please verify the credentials.', 400);
         }
 
     }

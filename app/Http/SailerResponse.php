@@ -11,7 +11,7 @@ namespace App\Http;
 
 use Illuminate\Http\JsonResponse;
 
-final class DwmResponse extends JsonResponse
+final class SailerResponse extends JsonResponse
 {
 
     public function __construct($success = true, $data = null, $status = 200, $headers = [], $options = 0)
