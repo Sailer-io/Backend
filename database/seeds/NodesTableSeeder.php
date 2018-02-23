@@ -12,9 +12,9 @@ class NodesTableSeeder extends Seeder
     public function run()
     {
         \App\Node\Node::create([
-            'name' => 'Localhost',
-            'ip' => '127.0.0.1',
-            'user_id' => 1
+            'name'    => 'Localhost',
+            'ip'      => '127.0.0.1',
+            'user_id' => 1,
         ]);
     }
 }
