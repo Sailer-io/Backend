@@ -18,11 +18,11 @@ before_script:
 script:
   - vendor/bin/phpunit --coverage-text --colors=never
 
-after_success:
-  only:
-    - development
-  - mkdir -p ~/.ssh
-  - echo $(echo $SSH_PRIVATE_KEY | base64 -d) > ~/.ssh/id_rsa
-  - chmod -R 400 ~/.ssh
-  - rsync -az --exclude=.git --exclude=vendor --exclude=tests -e "ssh -o StrictHostKeyChecking=no -l $SSH_USER" ./ $IP:$TFOLDER
-  - ssh -o StrictHostKeyChecking=no $SSH_USER@$IP "cd $TFOLDER && composer install --no-dev --optimize-autoloader; php artisan migrate:fresh --seed"
+#after_success:
+#  only:
+#    - development
+#  - mkdir -p ~/.ssh
+#  - echo $(echo $SSH_PRIVATE_KEY | base64 -d) > ~/.ssh/id_rsa
+#  - chmod -R 400 ~/.ssh
+#  - rsync -az --exclude=.git --exclude=vendor --exclude=tests -e "ssh -o StrictHostKeyChecking=no -l $SSH_USER" ./ $IP:$TFOLDER
+#  - ssh -o StrictHostKeyChecking=no $SSH_USER@$IP "cd $TFOLDER && composer install --no-dev --optimize-autoloader; php artisan migrate:fresh --seed"
