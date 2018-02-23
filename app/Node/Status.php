@@ -2,11 +2,10 @@
 /**
  * User: Lénaïc GROLLEAU
  * Date: 16/02/18
- * Time: 17:44
+ * Time: 17:44.
  */
 
 namespace App\Node;
-
 
 abstract class Status
 {
