@@ -29,18 +29,20 @@ class ContainerController extends BaseAgentController
     {
         $r->validate([
             'domain' => 'required',
-            'uid' => 'required',
-            'repo' => 'required'
+            'uid'    => 'required',
+            'repo'   => 'required',
         ]);
         $container = Container::where('domain', $r->domain);
-        if (!is_null($container))
+        if (!is_null($container)) {
             return $this->update($r, $container);
+        }
         $c = new Container();
         $c->domain = $r->domain;
         $c->uid = $r->uid;
         $c->repo = $r->repo;
         $c->node_id = $this->node->id;
         $c->save();
+
         return $c->fresh();
     }
 
@@ -59,7 +61,7 @@ class ContainerController extends BaseAgentController
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $r
+     * @param Request        $r
      * @param \App\Container $container
      *
      * @return Container
@@ -68,14 +70,15 @@ class ContainerController extends BaseAgentController
     {
         $r->validate([
             'domain' => 'required',
-            'uid' => 'required',
-            'repo' => 'required'
+            'uid'    => 'required',
+            'repo'   => 'required',
         ]);
         $container->domain = $r->domain;
         $container->uid = $r->uid;
         $container->repo = $r->repo;
         $container->node_id = $this->node->id;
         $container->save();
+
         return $container->fresh();
     }
 
