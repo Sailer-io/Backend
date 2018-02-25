@@ -29,11 +29,13 @@ class ContainerController extends BaseAgentController
     {
         $r->validate([
             'domain' => 'required',
-            'uid' => 'required'
+            'uid' => 'required',
+            'repo' => 'required'
         ]);
         $c = new Container();
         $c->domain = $r->domain;
         $c->uid = $r->uid;
+        $c->repo = $r->repo;
         $c->node_id = $this->node->id;
         $c->save();
         return $c->fresh();
