@@ -32,7 +32,7 @@ class ContainerController extends BaseAgentController
             'uid'    => 'required',
             'repo'   => 'required',
         ]);
-        $container = Container::where('domain', $r->domain);
+        $container = Container::where('domain', $r->domain)->first();
         if (!is_null($container)) {
             return $this->update($r, $container);
         }
