@@ -21,13 +21,22 @@ class ContainerController extends BaseAgentController
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \Illuminate\Http\Request $r
      *
-     * @return \Illuminate\Http\Response
+     * @return Container
      */
-    public function store(Request $request)
+    public function store(Request $r)
     {
-        //
+        $r->validate([
+            'domain' => 'required',
+            'uid' => 'required'
+        ]);
+        $c = new Container();
+        $c->domain = $r->domain;
+        $c->uid = $r->uid;
+        $c->node_id = $this->node->id;
+        $c->save();
+        return $c->fresh();
     }
 
     /**
