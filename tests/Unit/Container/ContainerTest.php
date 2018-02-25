@@ -4,8 +4,6 @@ namespace Tests\Unit\Container;
 
 use App\Container;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ContainerTest extends TestCase
 {

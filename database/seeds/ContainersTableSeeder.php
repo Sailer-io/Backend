@@ -14,10 +14,10 @@ class ContainersTableSeeder extends Seeder
         $f = Faker\Factory::create();
         for ($i = 0; $i < 10; $i++) {
             \App\Container::create([
-                'domain' => $f->domainName,
+                'domain'   => $f->domainName,
                 'node_id'  => 1,
-                'uid' => $f->word,
-                'repo' => 'github.com/'.$f->word.'/'.$f->word
+                'uid'      => $f->word,
+                'repo'     => 'github.com/'.$f->word.'/'.$f->word,
             ]);
         }
     }
