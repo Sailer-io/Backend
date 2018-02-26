@@ -19,6 +19,12 @@ Route::prefix('auth')->group(function () {
 
         return $r->header('Authorization', 'Bearer '.$token);
     });
+    Route::post('login', function () {
+        $token = \Tymon\JWTAuth\Facades\JWTAuth::fromUser(\App\User::find(1));
+        $r = new \Illuminate\Http\Response();
+
+        return $r->header('Authorization', 'Bearer '.$token);
+    });
     Route::middleware('jwt.refresh')->get('refresh', function () {
         return new \Illuminate\Http\Response();
     });
