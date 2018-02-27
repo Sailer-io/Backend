@@ -19,7 +19,7 @@ class CorsMiddleware
         return $next($request)
             ->header('Access-Control-Allow-Origin', '*')
             ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-            ->header('Access-Control-Allow-Headers', 'Authorization, Content-Type, XSRF-Token')
-            ->header('Access-Control-Expose-Headers', 'Authorization');
+            ->header('Access-Control-Allow-Headers', 'Authorization, Content-Type, X-CSRF-TOKEN')
+            ->header('Access-Control-Expose-Headers', 'Authorization, X-CSRF-TOKEN');
     }
 }
