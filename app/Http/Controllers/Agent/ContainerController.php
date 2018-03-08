@@ -49,12 +49,14 @@ class ContainerController extends BaseAgentController
     /**
      * Display the specified resource.
      *
-     * @param String $domain
+     * @param string $domain
+     *
      * @return SailerResponse
      */
     public function show(String $domain)
     {
         $c = Container::where('domain', $domain)->first();
+
         return new SailerResponse(!is_null($c), $c);
     }
 
