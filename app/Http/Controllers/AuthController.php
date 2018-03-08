@@ -11,20 +11,23 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class AuthController extends Controller
 {
     /**
-     * Login the user
+     * Login the user.
+     *
      * @param Request $r
+     *
      * @return SailerResponse
      */
     public function login(Request $r)
     {
         $r->validate([
-            'email' => 'required',
-            'password' => 'required'
+            'email'    => 'required',
+            'password' => 'required',
         ]);
         $credentials = $r->only('email', 'password');
+
         try {
             // attempt to verify the credentials and create a token for the user
-            if (! $token = JWTAuth::attempt($credentials)) {
+            if (!$token = JWTAuth::attempt($credentials)) {
                 return new SailerResponse(false, 'Invalid credentials', 401);
             }
         } catch (JWTException $e) {
@@ -33,10 +36,11 @@ class AuthController extends Controller
         }
 
         // all good so return the token
-        return new SailerResponse(true, null, 200, ["Authorization" => $token]);
+        return new SailerResponse(true, null, 200, ['Authorization' => $token]);
     }
 
-    public function refresh(){
+    public function refresh()
+    {
         return new Response();
     }
 }
