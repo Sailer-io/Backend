@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class ContainerController extends BaseAgentController
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -22,41 +21,72 @@ class ContainerController extends BaseAgentController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $r
+     *
+     * @return Container
      */
-    public function store(Request $request)
+    public function store(Request $r)
     {
-        //
+        $r->validate([
+            'domain' => 'required',
+            'uid'    => 'required',
+            'repo'   => 'required',
+        ]);
+        $container = Container::where('domain', $r->domain)->first();
+        if (!is_null($container)) {
+            return $this->update($r, $container);
+        }
+        $c = new Container();
+        $c->domain = $r->domain;
+        $c->uid = $r->uid;
+        $c->repo = $r->repo;
+        $c->node_id = $this->node->id;
+        $c->save();
+
+        return $c->fresh();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Container  $container
-     * @return \Illuminate\Http\Response
+     * @param String $domain
+     * @return SailerResponse
      */
-    public function show(Container $container)
+    public function show(String $domain)
     {
-        //
+        $c = Container::where('domain', $domain)->first();
+        return new SailerResponse(!is_null($c), $c);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Container  $container
-     * @return \Illuminate\Http\Response
+     * @param Request        $r
+     * @param \App\Container $container
+     *
+     * @return Container
      */
-    public function update(Request $request, Container $container)
+    public function update(Request $r, Container $container)
     {
-        //
+        $r->validate([
+            'domain' => 'required',
+            'uid'    => 'required',
+            'repo'   => 'required',
+        ]);
+        $container->domain = $r->domain;
+        $container->uid = $r->uid;
+        $container->repo = $r->repo;
+        $container->node_id = $this->node->id;
+        $container->save();
+
+        return $container->fresh();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Container  $container
+     * @param \App\Container $container
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Container $container)

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateContainersTable extends Migration
 {
@@ -15,7 +15,9 @@ class CreateContainersTable extends Migration
     {
         Schema::create('containers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('hostname');
+            $table->string('domain');
+            $table->string('uid');
+            $table->string('repo');
             $table->integer('node_id')->unsigned();
             $table->foreign('node_id')->references('id')->on('nodes');
             $table->timestamps();

@@ -21,7 +21,8 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -29,15 +30,18 @@ class UserController extends Controller
         //
     }
 
-    public function whoami(){
-        $u=JWTAuth::parseToken()->authenticate();
+    public function whoami()
+    {
+        $u = JWTAuth::parseToken()->authenticate();
+
         return $this->show($u);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param \App\User $user
+     *
      * @return User
      */
     public function show(User $user)
@@ -48,7 +52,8 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param \App\User $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
@@ -59,8 +64,9 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @param \Illuminate\Http\Request $request
+     * @param \App\User                $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
@@ -71,7 +77,8 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @param \App\User $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
