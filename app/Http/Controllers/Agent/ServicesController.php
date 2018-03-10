@@ -25,4 +25,13 @@ class ServicesController extends BaseAgentController
             return new SailerResponse(true, ['password' => $service->password]);
         }
     }
+
+    public function info(Request $r){
+        $r->validate([
+            'name' => 'required'
+        ]);
+        $service = Service::where('name', $r->name)->where('node_id', $this->node->id)->first();
+        if (is_null($service)) return new SailerResponse(false, null, 404);
+        return new SailerResponse(true, $service);
+    }
 }
