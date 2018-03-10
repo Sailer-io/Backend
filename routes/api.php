@@ -16,4 +16,7 @@ Route::middleware('node.auth')->namespace('Agent')->prefix('agent')->group(funct
     Route::get('whoami', 'NodeController@whoami');
     Route::apiResource('containers', 'ContainerController');
     Route::get('ping', 'AppController@ping');
+    Route::prefix('services')->group(function (){
+        Route::post('getOrCreate', 'ServicesController@getOrCreate');
+    });
 });
