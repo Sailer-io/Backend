@@ -18,7 +18,7 @@ class NodesTableSeeder extends Seeder
         ]);
         \App\Node\Node::create([
             'name'    => 'Test node',
-            'ip'      => '216.155.157.251',
+            'ip'      => '173.199.122.25',
             'user_id' => 1,
         ]);
     }
