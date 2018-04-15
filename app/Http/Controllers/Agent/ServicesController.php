@@ -17,13 +17,12 @@ class ServicesController extends BaseAgentController
         if (is_null($service)) {
             $service = new Service();
             $service->node_id = $this->node->id;
-            $service->password = bin2hex(random_bytes(12));
             $service->name = $r->name;
             $service->save();
 
-            return new SailerResponse(true, ['password' => $service->password], 201);
+            return new SailerResponse(true, 201);
         } else {
-            return new SailerResponse(true, ['password' => $service->password]);
+            return new SailerResponse(true);
         }
     }
 
